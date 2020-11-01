@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
             <Toolbar>
               <Typography className={classes.title} variant="h6">
                 <Link href="/">
-                  <a>Nodebird</a>
+                  <a>dev.t2</a>
                 </Link>
               </Typography>
 
