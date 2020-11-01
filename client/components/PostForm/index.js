@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardMedia,
   Grid,
@@ -17,6 +16,7 @@ import useStyles from './styles';
 
 import useInput from '../../hooks/useInput';
 import { ADD_POST_REQUEST, REMOVE_IMAGE, UPLOAD_IMAGES_REQUEST } from '../../_actionTypes/post';
+import { backend } from '../../config';
 
 const PostForm = () => {
   const dispatch = useDispatch();
@@ -128,7 +128,7 @@ const PostForm = () => {
                     component="img"
                     alt={path}
                     height="200"
-                    image={`http://localhost:3065/${path}`}
+                    image={`${backend}/${path}`}
                     title={path}
                   />
 

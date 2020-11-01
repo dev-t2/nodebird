@@ -13,6 +13,7 @@ import NicknameEditForm from '../components/NicknameEditForm';
 import FollowList from '../components/FollowList';
 import { LOAD_MY_INFO_REQUEST } from '../_actionTypes/userInfo';
 import wrapper from '../_store/configureStore';
+import { backend } from '../config';
 
 const fetcher = (url) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 
@@ -21,11 +22,11 @@ const Profile = () => {
   const [followingsLimit, setFollowingsLimit] = useState(10);
 
   const { data: followersData, error: followerError } = useSWR(
-    `http://localhost:3065/user/followers?limit=${followersLimit}`,
+    `${backend}/user/followers?limit=${followersLimit}`,
     fetcher
   );
   const { data: followingsData, error: followingError } = useSWR(
-    `http://localhost:3065/user/followings?limit=${followingsLimit}`,
+    `${backend}/user/followings?limit=${followingsLimit}`,
     fetcher
   );
 

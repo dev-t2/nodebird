@@ -12,6 +12,7 @@ import { LOAD_POST_REQUEST } from '../../_actionTypes/post';
 
 import PostCard from '../../components/PostCard';
 import Layout from '../../components/Layout';
+import { backend } from '../../config';
 
 const Post = () => {
   const router = useRouter();
@@ -27,11 +28,9 @@ const Post = () => {
         <meta property="og:description" content={singlePost.content} />
         <meta
           property="og:image"
-          content={
-            singlePost.Images[0] ? singlePost.Images[0].src : 'http://dev-t2.com/favicon.ico'
-          }
+          content={singlePost.Images[0] ? singlePost.Images[0].src : `${backend}/favicon.ico`}
         />
-        <meta property="og:url" content={`https://dev-t2.com/post/${id}`} />
+        <meta property="og:url" content={`${backend}/post/${id}`} />
 
         <title>{singlePost.User.nickname} 게시글</title>
       </Head>

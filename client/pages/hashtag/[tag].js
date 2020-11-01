@@ -22,6 +22,7 @@ import { LOAD_HASHTAG_POSTS_REQUEST } from '../../_actionTypes/post';
 
 import PostCard from '../../components/PostCard';
 import Layout from '../../components/Layout';
+import { backend } from '../../config';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,8 +87,8 @@ const Hashtag = () => {
           <meta name="description" content={`${otherUser.nickname}님의 게시글`} />
           <meta property="og:title" content={`${otherUser.nickname}님의 게시글`} />
           <meta property="og:description" content={`${otherUser.nickname}님의 게시글`} />
-          <meta property="og:image" content="https://nodebird.com/favicon.ico" />
-          <meta property="og:url" content={`https://nodebird.com/hashtag/${tag}`} />
+          <meta property="og:image" content={`${backend}/favicon.ico`} />
+          <meta property="og:url" content={`${backend}/hashtag/${tag}`} />
         </Head>
       )}
 

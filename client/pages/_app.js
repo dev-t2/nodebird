@@ -1,5 +1,4 @@
 import App from 'next/app';
-import Head from 'next/head';
 import { CssBaseline } from '@material-ui/core';
 
 import wrapper from '../_store/configureStore';

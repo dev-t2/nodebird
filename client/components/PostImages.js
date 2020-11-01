@@ -3,6 +3,7 @@ import { memo, useCallback, useState } from 'react';
 import { Button, CardMedia, makeStyles } from '@material-ui/core';
 
 import ImagesZoom from './ImagesZoom';
+import { backend } from '../config';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -55,7 +56,7 @@ const PostImages = ({ images }) => {
         <div className={classes.image}>
           <CardMedia
             component="img"
-            image={`http://localhost:3065/${images[0].src}`}
+            image={`${backend}/${images[0].src}`}
             role="presentation"
             onClick={onClick}
           />
@@ -72,13 +73,13 @@ const PostImages = ({ images }) => {
         <div className={classes.images}>
           <CardMedia
             component="img"
-            image={`http://localhost:3065/${images[0].src}`}
+            image={`${backend}/${images[0].src}`}
             role="presentation"
             onClick={onClick}
           />
           <CardMedia
             component="img"
-            image={`http://localhost:3065/${images[1].src}`}
+            image={`${backend}/${images[1].src}`}
             role="presentation"
             onClick={onClick}
           />
@@ -94,7 +95,7 @@ const PostImages = ({ images }) => {
       <div className={classes.images}>
         <CardMedia
           component="img"
-          image={`http://localhost:3065/${images[0].src}`}
+          image={`${backend}/${images[0].src}`}
           role="presentation"
           onClick={onClick}
         />
