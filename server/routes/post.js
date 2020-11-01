@@ -29,7 +29,7 @@ const upload = multer({
     s3: new AWS.S3(),
     bucket: 'dev-t2',
     key(req, file, cb) {
-      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`);
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname.replace(/(\s*)/g, ''))}`);
     },
   }),
   limits: { fileSize: 20 * 1024 * 1024 },

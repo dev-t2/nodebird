@@ -12,7 +12,7 @@ import { LOAD_POST_REQUEST } from '../../_actionTypes/post';
 
 import PostCard from '../../components/PostCard';
 import Layout from '../../components/Layout';
-import { backend } from '../../config';
+import { frontend } from '../../config';
 
 const Post = () => {
   const router = useRouter();
@@ -28,9 +28,9 @@ const Post = () => {
         <meta property="og:description" content={singlePost.content} />
         <meta
           property="og:image"
-          content={singlePost.Images[0] ? singlePost.Images[0].src : `${backend}/favicon.ico`}
+          content={singlePost.Images[0] ? singlePost.Images[0].src : `${frontend}/favicon.ico`}
         />
-        <meta property="og:url" content={`${backend}/post/${id}`} />
+        <meta property="og:url" content={`${frontend}/post/${id}`} />
 
         <title>{singlePost.User.nickname} 게시글</title>
       </Head>
