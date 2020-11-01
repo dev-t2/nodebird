@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 
 const { Post, Comment, Image, User, Hashtag } = require('../models');
 const { isLoggedIn } = require('./middlewares');
@@ -16,16 +18,18 @@ try {
   fs.mkdirSync('uploads');
 }
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, done) {
-      done(null, 'uploads');
-    },
-    filename(req, file, done) {
-      const ext = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, ext);
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: S3_SECRET_ACCESS_KEY,
+  region: 'ap-northeast-2',
+});
 
-      done(null, `${new Date().getTime()}_${basename}${ext}`);
+const upload = multer({
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: 'dev-t2',
+    key(req, file, cb) {
+      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`);
     },
   }),
   limits: { fileSize: 20 * 1024 * 1024 },
@@ -107,7 +111,7 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
 
 router.post('/images', isLoggedIn, upload.array('images'), async (req, res, next) => {
   try {
-    res.json(req.files.map((file) => file.filename));
+    res.json(req.files.map((file) => file.location));
   } catch (error) {
     console.error(error);
 

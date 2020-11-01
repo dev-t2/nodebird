@@ -2,3 +2,4 @@ dev-t2.pem
 node_modules
 .env
 .next
+rootkey.csv
