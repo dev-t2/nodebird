@@ -64,6 +64,8 @@ app.use('/post', postRouter);
 app.use('/posts', postsRouter);
 app.use('/hashtag', hashtagRouter);
 
-app.listen(3065, () => {
-  console.log('서버 실행 중');
-});
+if (process.env.NODE_ENV === 'production') {
+  app.listen(80);
+} else {
+  app.listen(3065);
+}
