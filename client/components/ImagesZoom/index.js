@@ -25,7 +25,7 @@ const ImagesZoom = ({ open, images, onClose }) => {
         <Slider dots className={classes.slider}>
           {images.map((image) => (
             <div key={image.src}>
-              <img src={`${image.src.replace('/thumb/', '/original/')}`} alt={image.src} />
+              <img src={`${image.src.replace('//thumb//', '/original/')}`} alt={image.src} />
             </div>
           ))}
         </Slider>
