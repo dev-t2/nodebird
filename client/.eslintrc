@@ -1,0 +1,38 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": "airbnb",
+  "plugins": ["import", "react-hooks"],
+  "rules": {
+    "linebreak-style": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "comma-dangle": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/prop-types": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/no-array-index-key": "off",
+    "no-shadow": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-param-reassign": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "no-unused-vars": "off",
+    "no-nested-ternary": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off"
+  }
+}
