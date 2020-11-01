@@ -8,8 +8,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { backend } from '../../config';
-
 import useStyles from './styles';
 
 const ImagesZoom = ({ open, images, onClose }) => {
@@ -27,7 +25,7 @@ const ImagesZoom = ({ open, images, onClose }) => {
         <Slider dots className={classes.slider}>
           {images.map((image) => (
             <div key={image.src}>
-              <img src={`${backend}/${image.src}`} alt={image.src} />
+              <img src={image.src} alt={image.src} />
             </div>
           ))}
         </Slider>

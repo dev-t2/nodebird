@@ -3,7 +3,6 @@ import { memo, useCallback, useState } from 'react';
 import { Button, CardMedia, makeStyles } from '@material-ui/core';
 
 import ImagesZoom from './ImagesZoom';
-import { backend } from '../config';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -54,12 +53,7 @@ const PostImages = ({ images }) => {
     return (
       <>
         <div className={classes.image}>
-          <CardMedia
-            component="img"
-            image={`${backend}/${images[0].src}`}
-            role="presentation"
-            onClick={onClick}
-          />
+          <CardMedia component="img" image={images[0].src} role="presentation" onClick={onClick} />
         </div>
 
         <ImagesZoom open={showImagesZoom} images={images} onClose={onClose} />
@@ -71,18 +65,8 @@ const PostImages = ({ images }) => {
     return (
       <>
         <div className={classes.images}>
-          <CardMedia
-            component="img"
-            image={`${backend}/${images[0].src}`}
-            role="presentation"
-            onClick={onClick}
-          />
-          <CardMedia
-            component="img"
-            image={`${backend}/${images[1].src}`}
-            role="presentation"
-            onClick={onClick}
-          />
+          <CardMedia component="img" image={images[0].src} role="presentation" onClick={onClick} />
+          <CardMedia component="img" image={images[1].src} role="presentation" onClick={onClick} />
         </div>
 
         <ImagesZoom open={showImagesZoom} images={images} onClose={onClose} />
@@ -93,12 +77,7 @@ const PostImages = ({ images }) => {
   return (
     <>
       <div className={classes.images}>
-        <CardMedia
-          component="img"
-          image={`${backend}/${images[0].src}`}
-          role="presentation"
-          onClick={onClick}
-        />
+        <CardMedia component="img" image={images[0].src} role="presentation" onClick={onClick} />
         <Button className={classes.button} aria-label="more" role="presentation" onClick={onClick}>
           {`${images.length - 1}개의 사진 더보기`}
         </Button>

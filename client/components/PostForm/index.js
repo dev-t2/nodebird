@@ -16,7 +16,6 @@ import useStyles from './styles';
 
 import useInput from '../../hooks/useInput';
 import { ADD_POST_REQUEST, REMOVE_IMAGE, UPLOAD_IMAGES_REQUEST } from '../../_actionTypes/post';
-import { backend } from '../../config';
 
 const PostForm = () => {
   const dispatch = useDispatch();
@@ -124,13 +123,7 @@ const PostForm = () => {
             {imagePaths.map((path, index) => (
               <Grid item xs={12} sm={6} md={6} lg={4}>
                 <Card key={path} className={classes.imagePath} variant="outlined">
-                  <CardMedia
-                    component="img"
-                    alt={path}
-                    height="200"
-                    image={`${backend}/${path}`}
-                    title={path}
-                  />
+                  <CardMedia component="img" alt={path} height="200" image={path} title={path} />
 
                   <CardActions className={classes.action}>
                     <Button size="small" color="secondary" onClick={onClick(index)}>
