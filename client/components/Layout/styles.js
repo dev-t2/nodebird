@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '20ch',
+    width: '12ch',
     '&:focus': {
-      width: '28ch',
+      width: '20ch',
     },
   },
 }));

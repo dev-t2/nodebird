@@ -51,7 +51,6 @@ const Layout = ({ children }) => {
                   <Search />
                 </div>
                 <InputBase
-                  placeholder="태그를 검색하세요."
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
