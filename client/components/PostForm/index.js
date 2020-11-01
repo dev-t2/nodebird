@@ -123,7 +123,13 @@ const PostForm = () => {
             {imagePaths.map((path, index) => (
               <Grid item xs={12} sm={6} md={6} lg={4}>
                 <Card key={path} className={classes.imagePath} variant="outlined">
-                  <CardMedia component="img" alt={path} height="200" image={path} title={path} />
+                  <CardMedia
+                    component="img"
+                    alt={path}
+                    height="200"
+                    image={path.replace(/\/thumb\//, '/original/')}
+                    title={path}
+                  />
 
                   <CardActions className={classes.action}>
                     <Button size="small" color="secondary" onClick={onClick(index)}>
