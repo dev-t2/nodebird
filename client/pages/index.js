@@ -10,6 +10,7 @@ import { LOAD_POSTS_REQUEST } from '../_actionTypes/post';
 import Layout from '../components/Layout';
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
+import { frontend } from '../config';
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,13 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>Nodebird</title>
+        <title>dev-t2</title>
+        <meta name="description" content="개인 웹사이트 만들기 전에 테스트..." />
+
+        <meta property="og:title" content="dev-t2" />
+        <meta property="og:description" content="개인 웹사이트 만들기 전에 테스트..." />
+        <meta property="og:image" content={`${frontend}/favicon.ico`} />
+        <meta property="og:url" content={`${frontend}`} />
       </Head>
 
       <Layout>
