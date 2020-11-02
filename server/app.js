@@ -78,8 +78,4 @@ app.use('/post', postRouter);
 app.use('/posts', postsRouter);
 app.use('/hashtag', hashtagRouter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.listen(80);
-} else {
-  app.listen(3065);
-}
+app.listen(3065);
