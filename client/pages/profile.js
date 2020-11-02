@@ -46,8 +46,6 @@ const Profile = () => {
     setFollowingsLimit((prev) => prev + 10);
   }, []);
 
-  console.log(followersData, followingsData);
-
   if (!user) return '로딩 중...';
 
   if (followerError || followingError) {

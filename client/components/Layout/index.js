@@ -38,14 +38,6 @@ const Layout = ({ children }) => {
                 </Link>
               </Typography>
 
-              {user && (
-                <Typography className={classes.profile}>
-                  <Link href="/profile">
-                    <a>프로필</a>
-                  </Link>
-                </Typography>
-              )}
-
               <form className={classes.search} onSubmit={onSearch}>
                 <div className={classes.searchIcon}>
                   <Search />

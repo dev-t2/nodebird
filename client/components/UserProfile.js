@@ -50,9 +50,15 @@ const UserProfile = () => {
           </Link>
         }
         action={
-          <Button size="small" onClick={onClickLogout}>
-            로그아웃
-          </Button>
+          <>
+            <Button className={classes.profile}>
+              <Link href="/profile">
+                <a>프로필</a>
+              </Link>
+            </Button>
+
+            <Button onClick={onClickLogout}>로그아웃</Button>
+          </>
         }
       />
 

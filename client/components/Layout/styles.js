@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  profile: {
-    marginRight: theme.spacing(2),
-  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -43,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
-    width: '12ch',
+    width: '18ch',
     '&:focus': {
-      width: '16ch',
+      width: '26ch',
     },
   },
 }));
