@@ -131,7 +131,7 @@ const PostCard = ({ post }) => {
     }
 
     return setCommentFormOpened((prevLiked) => !prevLiked);
-  }, []);
+  }, [id]);
 
   const onUpdatePost = useCallback(
     (text) => () => {
