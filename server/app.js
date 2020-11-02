@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(helmet());
   app.use(
     cors({
-      origin: 'http://dev-t2.com',
+      origin: 'https://dev-t2.com',
       credentials: true,
     })
   );
@@ -62,7 +62,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     cookie: {
       httpOnly: true,
-      secure: false,
+      secure: true,
       domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
     },
   })
