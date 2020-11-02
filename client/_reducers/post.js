@@ -35,6 +35,9 @@ import {
   LOAD_HASHTAG_POSTS_FAILURE,
   LOAD_USER_POSTS_REQUEST,
   LOAD_HASHTAG_POSTS_REQUEST,
+  UPDATE_POST_REQUEST,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_FAILURE,
 } from '../_actionTypes/post';
 
 export const initialState = {
@@ -54,6 +57,9 @@ export const initialState = {
   addPostLoading: false,
   addPostDone: false,
   addPostError: null,
+  updatePostLoading: false,
+  updatePostDone: false,
+  updatePostError: null,
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
@@ -139,6 +145,24 @@ const reducer = (state = initialState, action) =>
       case ADD_POST_FAILURE:
         draft.addPostLoading = false;
         draft.addPostError = action.error;
+        break;
+
+      case UPDATE_POST_REQUEST:
+        draft.updatePostLoading = true;
+        draft.updatePostDone = false;
+        draft.updatePostError = null;
+        break;
+
+      case UPDATE_POST_SUCCESS:
+        draft.mainPosts.find((post) => post.id === action.data.PostId).content =
+          action.data.content;
+        draft.updatePostLoading = false;
+        draft.updatePostDone = true;
+        break;
+
+      case UPDATE_POST_FAILURE:
+        draft.updatePostLoading = false;
+        draft.updatePostError = action.error;
         break;
 
       case REMOVE_POST_REQUEST:

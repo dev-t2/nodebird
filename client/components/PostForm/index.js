@@ -88,7 +88,7 @@ const PostForm = () => {
             multiline
             rows={4}
             fullWidth
-            placeholder="어떤 신기한 일이 있었나요?"
+            placeholder="게시물을 작성하세요."
             value={text}
             onChange={onChangeText}
           />

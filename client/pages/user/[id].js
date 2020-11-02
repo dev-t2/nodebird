@@ -42,7 +42,7 @@ const User = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const { otherUser } = useSelector((state) => state.userInfo);
+  const { otherUser, user } = useSelector((state) => state.userInfo);
   const { mainPosts, hasMorePost, loadPostLoading, retweetError } = useSelector(
     (state) => state.post
   );
@@ -93,7 +93,7 @@ const User = () => {
         </Head>
       )}
 
-      {otherUser && (
+      {otherUser && otherUser.id !== user.id ? (
         <Card className={classes.root} variant="outlined">
           <CardHeader
             title={otherUser.nickname}
@@ -123,7 +123,7 @@ const User = () => {
             </Grid>
           </CardContent>
         </Card>
-      )}
+      ) : null}
 
       {mainPosts.map((post) => (
         <PostCard key={post.id} post={post} />

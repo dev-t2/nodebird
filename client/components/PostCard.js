@@ -31,6 +31,7 @@ import {
   LIKE_POST_REQUEST,
   UNLIKE_POST_REQUEST,
   RETWEET_REQUEST,
+  UPDATE_POST_REQUEST,
 } from '../_actionTypes/post';
 
 import CommentForm from './CommentForm';
@@ -68,8 +69,17 @@ const PostCard = ({ post }) => {
   const liked = post.Likers.find((v) => v.id === id);
 
   const [commentFormOpened, setCommentFormOpened] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   const classes = useStyles();
+
+  const onChangePost = useCallback(() => {
+    setEditMode(true);
+  }, []);
+
+  const onCancelPost = useCallback(() => {
+    setEditMode(false);
+  }, []);
 
   const onClickDelete = useCallback(() => {
     if (!id) {
@@ -119,6 +129,23 @@ const PostCard = ({ post }) => {
     setCommentFormOpened((prevLiked) => !prevLiked);
   }, []);
 
+  const onUpdatePost = useCallback(
+    (text) => () => {
+      if (!text || !text.trim()) {
+        return alert('게시글을 작성하세요.');
+      }
+
+      return dispatch({
+        type: UPDATE_POST_REQUEST,
+        data: {
+          PostId: post.id,
+          content: text,
+        },
+      });
+    },
+    [post]
+  );
+
   return (
     <div className={classes.root}>
       <Card className={classes.card} variant="outlined">
@@ -139,7 +166,11 @@ const PostCard = ({ post }) => {
           action={
             id && post.User.id === id ? (
               <>
-                <Button color="primary">수정</Button>
+                {post.RetweetId || editMode ? null : (
+                  <Button color="primary" onClick={onChangePost}>
+                    수정
+                  </Button>
+                )}
                 <Button color="secondary" onClick={onClickDelete}>
                   삭제
                 </Button>
@@ -147,7 +178,7 @@ const PostCard = ({ post }) => {
             ) : (
               <>
                 {id && <Follow post={post} />}
-                <Button color="secondary">신고</Button>
+                {/* <Button color="secondary">신고</Button> */}
               </>
             )
           }
@@ -170,13 +201,18 @@ const PostCard = ({ post }) => {
                 subheader={moment(post.Retweet.createdAt).format('YYYY.MM.DD')}
               />
 
-              <PostImages images={post.Retweet.Images} />
+              {post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}
               <div className={classes.postContent}>
                 <PostContent postData={post.Retweet.content} />
               </div>
             </Card>
           ) : (
-            <PostContent postData={post.content} />
+            <PostContent
+              postData={post.content}
+              editMode={editMode}
+              onUpdatePost={onUpdatePost}
+              onCancelPost={onCancelPost}
+            />
           )}
         </CardContent>
 

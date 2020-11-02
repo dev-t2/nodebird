@@ -31,9 +31,8 @@ db.sequelize
 
 passportConfig();
 
-app.set('trust proxy', 1);
-
 if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
   app.use(morgan('combined'));
   app.use(hpp());
   app.use(helmet());
@@ -41,6 +40,19 @@ if (process.env.NODE_ENV === 'production') {
     cors({
       origin: 'https://dev-t2.com',
       credentials: true,
+    })
+  );
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+      proxy: true,
+      cookie: {
+        httpOnly: true,
+        secure: true,
+        domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
+      },
     })
   );
 } else {
@@ -51,25 +63,25 @@ if (process.env.NODE_ENV === 'production') {
       credentials: true,
     })
   );
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+      proxy: true,
+      cookie: {
+        httpOnly: true,
+        secure: false,
+        domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
+      },
+    })
+  );
 }
 
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    proxy: true,
-    cookie: {
-      httpOnly: true,
-      secure: true,
-      domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
-    },
-  })
-);
 app.use(passport.initialize());
 app.use(passport.session());
 

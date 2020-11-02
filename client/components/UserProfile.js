@@ -43,7 +43,7 @@ const UserProfile = () => {
       <CardHeader
         title={user.nickname}
         avatar={
-          <Link href={`/user/${user.id}`}>
+          <Link href={`/user/${user.id}`} prefetch={false}>
             <a>
               <Avatar aria-label="avatar">{user.nickname[0]}</Avatar>
             </a>
@@ -52,7 +52,7 @@ const UserProfile = () => {
         action={
           <>
             <Button className={classes.profile}>
-              <Link href="/profile">
+              <Link href="/profile" prefetch={false}>
                 <a>프로필</a>
               </Link>
             </Button>
@@ -65,7 +65,7 @@ const UserProfile = () => {
       <CardContent className={classes.content}>
         <Grid container>
           <Grid item xs={4}>
-            <Link href={`/user/${user.id}`}>
+            <Link href={`/user/${user.id}`} prefetch={false}>
               <a>
                 <Typography className={classes.typography}>게시물</Typography>
                 <Typography className={classes.typography}>{user.Posts.length}</Typography>
@@ -73,7 +73,7 @@ const UserProfile = () => {
             </Link>
           </Grid>
           <Grid item xs={4}>
-            <Link href="/profile">
+            <Link href="/profile" prefetch={false}>
               <a>
                 <Typography className={classes.typography}>팔로잉</Typography>
                 <Typography className={classes.typography}>{user.Followings.length}</Typography>
@@ -81,7 +81,7 @@ const UserProfile = () => {
             </Link>
           </Grid>
           <Grid item xs={4}>
-            <Link href="/profile">
+            <Link href="/profile" prefetch={false}>
               <a>
                 <Typography className={classes.typography}>팔로워</Typography>
                 <Typography className={classes.typography}>{user.Followers.length}</Typography>
