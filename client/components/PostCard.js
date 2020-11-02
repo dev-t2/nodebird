@@ -150,8 +150,6 @@ const PostCard = ({ post }) => {
     [post]
   );
 
-  console.log(post);
-
   return (
     <div className={classes.root}>
       <Card className={classes.card} variant="outlined">

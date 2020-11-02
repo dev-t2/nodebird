@@ -45,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
       width: '26ch',
     },
   },
+  dialogContent: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default useStyles;

@@ -6,7 +6,15 @@ import { END } from 'redux-saga';
 import axios from 'axios';
 import useSWR from 'swr';
 
-import { Grid } from '@material-ui/core';
+import {
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  makeStyles,
+} from '@material-ui/core';
 
 import Layout from '../components/Layout';
 import NicknameEditForm from '../components/NicknameEditForm';
@@ -17,9 +25,20 @@ import { backend } from '../config';
 
 const fetcher = (url) => axios.get(url, { withCredentials: true }).then((result) => result.data);
 
+const useStyles = makeStyles((theme) => ({
+  dialogContent: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+  },
+}));
+
 const Profile = () => {
   const [followersLimit, setFollowersLimit] = useState(10);
   const [followingsLimit, setFollowingsLimit] = useState(10);
+
+  const classes = useStyles();
 
   const { data: followersData, error: followerError } = useSWR(
     `${backend}/user/followers?limit=${followersLimit}`,
@@ -46,7 +65,19 @@ const Profile = () => {
     setFollowingsLimit((prev) => prev + 10);
   }, []);
 
-  if (!user) return '로딩 중...';
+  if (!user) {
+    return (
+      <Dialog open={!user}>
+        <DialogTitle>로그아웃</DialogTitle>
+        <DialogContent>
+          <DialogContentText>잠시만 기다려주세요...</DialogContentText>
+        </DialogContent>
+        <DialogContent className={classes.dialogContent}>
+          <CircularProgress />
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   if (followerError || followingError) {
     console.error(followerError || followingError);

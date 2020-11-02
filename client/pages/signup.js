@@ -6,6 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Checkbox,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -40,11 +45,17 @@ const useStyles = makeStyles((theme) => ({
   item: {
     padding: theme.spacing(1, 2),
   },
+  dialogContent: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const { user, signupDone, signupError } = useSelector((state) => state.userInfo);
+  const { user, signupDone, signupError, signupLoading } = useSelector((state) => state.userInfo);
 
   const [email, setEmail] = useState('');
   const [nickname, onChangeNickname] = useInput('');
@@ -209,6 +220,18 @@ const Signup = () => {
           </Paper>
         </div>
       </Layout>
+
+      <Dialog open={signupLoading}>
+        <DialogTitle>회원가입</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            회원 정보를 등록하고 있습니다. 잠시만 기다려주세요...
+          </DialogContentText>
+        </DialogContent>
+        <DialogContent className={classes.dialogContent}>
+          <CircularProgress />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
