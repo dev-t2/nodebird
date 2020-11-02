@@ -57,6 +57,16 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
       return res.status(403).send('등록된 이메일입니다.');
     }
 
+    const findNickname = await User.findOne({
+      where: {
+        nickname: req.body.nickname,
+      },
+    });
+
+    if (findNickname) {
+      return res.status(403).send('등록된 닉네임입니다.');
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
 
     await User.create({

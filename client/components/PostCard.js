@@ -126,7 +126,11 @@ const PostCard = ({ post }) => {
   }, [id]);
 
   const onClickCommentFormOpened = useCallback(() => {
-    setCommentFormOpened((prevLiked) => !prevLiked);
+    if (!id) {
+      return alert('로그인이 필요합니다.');
+    }
+
+    return setCommentFormOpened((prevLiked) => !prevLiked);
   }, []);
 
   const onUpdatePost = useCallback(
@@ -146,6 +150,8 @@ const PostCard = ({ post }) => {
     [post]
   );
 
+  console.log(post);
+
   return (
     <div className={classes.root}>
       <Card className={classes.card} variant="outlined">
@@ -160,7 +166,7 @@ const PostCard = ({ post }) => {
           title={
             post.RetweetId && post.Retweet
               ? `${post.User.nickname}님이 리트윗하셨습니다.`
-              : post.User.nickname
+              : `${post.User.nickname}`
           }
           subheader={moment(post.createdAt).format('YYYY.MM.DD')}
           action={
