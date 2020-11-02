@@ -124,7 +124,7 @@ const PostCard = ({ post }) => {
       <Card className={classes.card} variant="outlined">
         <CardHeader
           avatar={
-            <Link href={`/user/${post.User.id}`}>
+            <Link href={`/user/${post.User.id}`} prefetch={false}>
               <a>
                 <Avatar aria-label="avatar">{post.User.nickname[0]}</Avatar>
               </a>
@@ -160,7 +160,7 @@ const PostCard = ({ post }) => {
             <Card className={classes.retweet} variant="outlined">
               <CardHeader
                 avatar={
-                  <Link href={`/user/${post.Retweet.User.id}`}>
+                  <Link href={`/user/${post.Retweet.User.id}`} prefetch={false}>
                     <a>
                       <Avatar aria-label="avatar">{post.Retweet.User.nickname[0]}</Avatar>
                     </a>
@@ -209,7 +209,7 @@ const PostCard = ({ post }) => {
               {post.Comments.map((comment) => (
                 <ListItem key={comment.id}>
                   <ListItemAvatar>
-                    <Link href={`/user/${comment.User.id}`}>
+                    <Link href={`/user/${comment.User.id}`} prefetch={false}>
                       <a>
                         <Avatar>{comment.User.nickname[0]}</Avatar>
                       </a>

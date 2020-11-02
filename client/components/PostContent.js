@@ -23,6 +23,7 @@ const PostContent = ({ postData }) => {
               key={index}
               className={classes.link}
               color="primary"
+              prefetch={false}
               href={`/hashtag/${data.slice(1)}`}
             >
               <a>{data}</a>
