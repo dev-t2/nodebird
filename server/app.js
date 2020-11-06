@@ -32,25 +32,20 @@ db.sequelize
 passportConfig();
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('trust proxy', 1);
+  app.enable('trust proxy');
   app.use(morgan('combined'));
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
-  app.use(
-    cors({
-      origin: 'https://dev-t2.com',
-      credentials: true,
-    })
-  );
 } else {
   app.use(morgan('dev'));
-  app.use(
-    cors({
-      origin: true,
-      credentials: true,
-    })
-  );
 }
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
