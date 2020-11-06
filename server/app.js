@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(helmet());
   app.use(
     cors({
-      origin: 'https://dev-t2.com',
+      origin: true,
       credentials: true,
     })
   );
