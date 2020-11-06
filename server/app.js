@@ -13,12 +13,12 @@ const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const postsRouter = require('./routes/posts');
 const hashtagRouter = require('./routes/hashtag');
+const db = require('./models');
+const passportConfig = require('./passport');
 
 dotenv.config();
 
 const app = express();
-const db = require('./models');
-const passportConfig = require('./passport');
 
 db.sequelize
   .sync()
@@ -32,7 +32,7 @@ db.sequelize
 passportConfig();
 
 if (process.env.NODE_ENV === 'production') {
-  app.enable('trust proxy');
+  app.use('trust proxy', 1);
   app.use(morgan('combined'));
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
@@ -52,7 +52,6 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
