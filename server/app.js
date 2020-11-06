@@ -32,7 +32,7 @@ db.sequelize
 passportConfig();
 
 if (process.env.NODE_ENV === 'production') {
-  app.enable('trust proxy');
+  app.use('trust proxy', 1);
   app.use(morgan('combined'));
   app.use(hpp());
   app.use(helmet({ contentSecurityPolicy: false }));
