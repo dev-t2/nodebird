@@ -13,12 +13,12 @@ const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
 const postsRouter = require('./routes/posts');
 const hashtagRouter = require('./routes/hashtag');
-const db = require('./models');
-const passportConfig = require('./passport');
 
 dotenv.config();
 
 const app = express();
+const db = require('./models');
+const passportConfig = require('./passport');
 
 db.sequelize
   .sync()
@@ -32,37 +32,56 @@ db.sequelize
 passportConfig();
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('trust proxy', 1);
+  app.set('trust proxy', 1);
   app.use(morgan('combined'));
   app.use(hpp());
-  app.use(helmet({ contentSecurityPolicy: false }));
+  app.use(helmet());
+  app.use(
+    cors({
+      origin: 'https://dev-t2.com',
+      credentials: true,
+    })
+  );
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+      proxy: true,
+      cookie: {
+        httpOnly: true,
+        secure: true,
+        domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
+      },
+    })
+  );
 } else {
   app.use(morgan('dev'));
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    })
+  );
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+      proxy: true,
+      cookie: {
+        httpOnly: true,
+        secure: false,
+        domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
+      },
+    })
+  );
 }
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
-
+app.use('/', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(
-  session({
-    saveUninitialized: false,
-    resave: false,
-    secret: process.env.COOKIE_SECRET,
-    proxy: process.env.NODE_ENV === 'production',
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      domain: process.env.NODE_ENV === 'production' && '.dev-t2.com',
-    },
-  })
-);
 app.use(passport.initialize());
 app.use(passport.session());
 
