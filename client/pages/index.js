@@ -61,14 +61,14 @@ const Index = () => {
         <meta property="og:url" content={`${frontend}`} />
       </Head>
 
-      <h1>1월 중에 업데이트 완료 예정!! Coming Soon!</h1>
+      {/* <h1>1월 중에 업데이트 완료 예정!! Coming Soon!</h1> */}
 
-      {/* <Layout>
+      <Layout>
         {user && <PostForm />}
         {mainPosts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
-      </Layout> */}
+      </Layout>
     </>
   );
 };
